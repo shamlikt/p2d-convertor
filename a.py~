@@ -1,0 +1,34 @@
+
+
+import sys
+import os
+from wand.image import Image
+
+
+if len(sys.argv)<4:
+    print "program [root_path] [image_hight] [image_width] "
+    exit()
+
+
+rootdir = str(sys.argv[1])
+print rootdir
+for subdir, dirs, files in os.walk(rootdir):
+    print "1"
+    for file1 in files:
+	print file1
+        if file1.endswith(".pdf"):
+            print os.path.join(subdir, file1)
+
+               # Converting first page into JPG
+            with Image(filename=os.path.join(subdir, file1)) as img:
+                     img.save(filename=os.path.join(subdir,file1.split('.')[0]+".jpg"))
+		     print filename
+
+             #Resizing this image
+
+            with Image(filename=os.path.join(subdir,file1.split('.')[0]+".jpg")) as img:
+                    img.resize(int(sys.argv[2]),int(sys.argv[3]))
+                    img.save(filename=str(subdir)+"/thumbnail_resize.jpg")
+
+
+
