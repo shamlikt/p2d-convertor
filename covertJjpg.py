@@ -1,5 +1,6 @@
 
-
+# initial version
+# only for testing the working of core
 from wand.image import Image
 # Converting first page into JPG
 with Image(filename="/thumbnail.pdf[0]") as img:
